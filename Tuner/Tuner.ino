@@ -6,11 +6,13 @@ const int bitRate    = 9600, // For logging
           volumePin  = 3,    // Input pin, switch
           octavePin  = 4,    // Input pin, switch
           auxPin     = 5,    // Input pin, switch
+          greenLed   = 6,    // Green LED
+          redLed     = 7,    // Red LED
           inputMin   = 0,    // Input minimum for potentiometer
           inputMax   = 1023, // Input maximum for potentiometer
           toneLength = 20,   // The length of the tone
           rootFreq   = 440,  // Root frequency (A2)
-          octaves    = 1,    // Number of octaves to allow
+          octaves    = 1,    // Number of octaves to allow. Only 1 for now.
           octaveMult = 2;    // Number of octaves to jump
                              // when octave switch is held.
                              // Positive number go up,
@@ -28,15 +30,21 @@ const float halfStepMultiplier = 1.059463094359;
 // Leave off the octave - we'll handle that in the loops.
 const int majorSize          = 7,
           harmonicMinorSize  = 7,
-          naturalMinorSize   = 7;
+          naturalMinorSize   = 7,
+          pentatonicSize     = 5,
+          bluesSize          = 6;
 
 const int majorSteps[majorSize]                  = { 0, 2, 4, 5, 7, 9, 11 },
           harmonicMinorSteps[harmonicMinorSize]  = { 0, 2, 3, 5, 7, 8, 11 },
-          naturalMinorSteps[naturalMinorSize]    = { 0, 2, 3, 5, 7, 8, 10 };
-
+          naturalMinorSteps[naturalMinorSize]    = { 0, 2, 3, 5, 7, 8, 10 },
+          pentatonicSteps[pentatonicSize]        = { 0, 2, 4, 7, 9 },
+          bluesSteps[bluesSize]                  = { 0, 3, 5, 6, 7, 10 };
+ 
 int majorFrequencies[majorSize]                  = { },
     harmonicMinorFrequencies[harmonicMinorSize]  = { },
-    naturalMinorFrequencies[naturalMinorSize]    = { };
+    naturalMinorFrequencies[naturalMinorSize]    = { },
+    pentatonicFrequencies[pentatonicSize]        = { },
+    bluesFrequencies[bluesSize]                  = { };
 
 int potValue,
     pitch,
@@ -46,6 +54,7 @@ int potValue,
 boolean toneIsOn = true,
         volumeSwitchWasPressed = false;
 
+
 ///////////////////////////////////////////////////////////
 
 
@@ -54,7 +63,7 @@ boolean toneIsOn = true,
 // * majorSteps (in setup)
 // * majorFrequencies (in setup)
 
-const int scaleSize = naturalMinorSize; // HERE
+const int scaleSize = bluesSize; // HERE
 int scaleSteps[scaleSize];
 int scaleFrequencies[scaleSize];
 
@@ -63,14 +72,14 @@ void setup() {
 
   memcpy(
     scaleSteps,
-    naturalMinorSteps, // HERE
-    sizeof(naturalMinorSteps) // HERE
+    bluesSteps, // HERE
+    sizeof(bluesSteps) // HERE
   );
 
   memcpy(
     scaleFrequencies,
-    naturalMinorFrequencies,
-    sizeof(naturalMinorFrequencies)
+    bluesFrequencies, // HERE
+    sizeof(bluesFrequencies) // HERE
   ); // HERE
 
   for (int octave = 0; octave < octaves; octave++) {
@@ -100,6 +109,8 @@ void setup() {
   pinMode(volumePin, INPUT);
   pinMode(octavePin, INPUT);
   pinMode(auxPin, INPUT);
+  pinMode(greenLed, OUTPUT);
+  pinMode(redLed, OUTPUT);
 }
 
 ///////////////////////////////////////////////////////////
@@ -141,12 +152,13 @@ void loop() {
     highFreq);
 
   pitch = snapFrequency(pitch);
+  handleVolumeLeds(pitch);
 
   // Check and handle the Octave Switch
   // It just makes the tone jump up or down an octave.
   if (isPressed(octavePin)) {
-    if (octavePin < 0) {
-      pitch /= -octaveMult;
+    if (octaveMult < 0) {
+      pitch /= -octaveMult; // This doesn't work.
     } else {
       pitch *= octaveMult;
     }
@@ -155,12 +167,13 @@ void loop() {
   // Check an handle the Auxiliary Switch
   // What does it do? Nobody knows!
   if (isPressed(auxPin)) {
-    // do something
+    pitch += 2;
   }
 
   tone(tonePin, pitch, toneLength);
   delay(10);
 }
+
 
 ///////////////////////////////////////////////////////////
 
@@ -240,6 +253,23 @@ void toggleTone() {
 
 ///////////////////////////////////////////////////////////
 
+// Handle the LED indicators.
+void handleVolumeLeds(int pitch) {
+  if (pitch <= rootFreq) {
+    turnOff(redLed);
+    turnOn(greenLed);
+  } else if (pitch >= highFreq) {
+    turnOff(greenLed);
+    turnOn(redLed);
+  } else {
+    turnOff(redLed);
+    turnOff(greenLed);
+  }
+}
+
+
+///////////////////////////////////////////////////////////
+
 // Turn On the tone.
 void activateTone() {
   digitalWrite(tonePin, HIGH);
@@ -253,5 +283,21 @@ void activateTone() {
 void deactivateTone() {
   digitalWrite(tonePin, LOW);
   toneIsOn = false;
+}
+
+
+///////////////////////////////////////////////////////////
+
+// Turn On the given pin.
+void turnOn(int pin) {
+  digitalWrite(pin, HIGH);
+}
+
+
+///////////////////////////////////////////////////////////
+
+// Turn Off the given pin.
+void turnOff(int pin) {
+  digitalWrite(pin, LOW);
 }
 
