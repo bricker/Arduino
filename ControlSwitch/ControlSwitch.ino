@@ -1,9 +1,10 @@
 int switchState = 0;
 
 int switchPin   = 2;
-int greenLedPin = 3;
-int redLed1Pin  = 4;
-int redLed2Pin  = 5;
+    greenLedPin = 3;
+    redLed1Pin  = 4;
+    redLed2Pin  = 5;
+
 
 void setup() {
   pinMode(switchPin,   INPUT);
@@ -14,17 +15,17 @@ void setup() {
 
 void loop() {
   switchState = digitalRead(switchPin);
-  
+
   if (switchState == LOW) {
     digitalWrite(redLed1Pin, LOW);
     digitalWrite(redLed2Pin, LOW);
-    
+
     blinkGreen();
   } else {
     digitalWrite(greenLedPin, LOW);
     digitalWrite(redLed1Pin,  LOW);
     digitalWrite(redLed2Pin,  HIGH);
-    
+
     delay(250);
     digitalWrite(redLed1Pin, HIGH);
     digitalWrite(redLed2Pin, LOW);

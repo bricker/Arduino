@@ -1,10 +1,10 @@
 int switchPin = 2;
 
 int led1 = 7;
-int led2 = 6;
-int led3 = 5;
-int led4 = 4;
-int led5 = 3;
+    led2 = 6;
+    led3 = 5;
+    led4 = 4;
+    led5 = 3;
 
 int switchState = LOW;
 int delayAmt    = 100;
@@ -33,11 +33,11 @@ void loop() {
 
   turnOff(led1);
   turnOff(led3);
-  turnOff(led5);  
+  turnOff(led5);
   turnOn(led2);
   turnOn(led4);
   delay(delayAmt);
-  
+
   turnOff(led2);
   turnOff(led4);
   delay(delayAmt);

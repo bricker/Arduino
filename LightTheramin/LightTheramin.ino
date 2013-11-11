@@ -5,8 +5,9 @@ int sensorValue,
 
 const int ledPin     = 13,
           tonePin    = 8,
-          sensorPin  = A0,
-          freqLow    = 50,
+          sensorPin  = A0;
+
+const int freqLow    = 50,
           freqHigh   = 4000,
           toneLength = 20;
 

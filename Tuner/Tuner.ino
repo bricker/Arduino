@@ -164,7 +164,7 @@ void loop() {
     }
   }
 
-  // Check an handle the Auxiliary Switch
+  // Check and handle the Auxiliary Switch
   // What does it do? Nobody knows!
   if (isPressed(auxPin)) {
     pitch += 2;
@@ -300,4 +300,3 @@ void turnOn(int pin) {
 void turnOff(int pin) {
   digitalWrite(pin, LOW);
 }
-

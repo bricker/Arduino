@@ -3,12 +3,13 @@ const int   sensorPin    = A0;
 const float baselineTemp = 20.0;
 
 const int blue   = 2;
-const int yellow = 3;
-const int red    = 4;
+          yellow = 3;
+          red    = 4;
+
 
 void setup() {
   Serial.begin(bitRate);
-  
+
   for (int pin = blue; pin <= red; pin++) {
     pinMode(pin, OUTPUT);
     turnOff(pin);
@@ -20,14 +21,6 @@ void loop() {
   float voltage      = (sensorVal/1024.0) * 5.0;
   float temperature  = (voltage - 0.5) * 100;
 
-  Serial.print("Sensor value: ");
-  Serial.print(sensorVal);
-  Serial.print("; Volts: ");
-  Serial.print(voltage);
-  Serial.print("; Temperature: ");
-  Serial.print(temperature);
-  Serial.println();
-
   turnOffAll();
 
   if (temperature < baselineTemp+4) {
@@ -37,7 +30,7 @@ void loop() {
   } else {
     turnOn(red);
   }
-  
+
   delay(1);
 }
 
