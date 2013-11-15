@@ -1,29 +1,32 @@
 const int notes[] = { 262, 294, 330, 349 };
 
-#define ANALOG A0
-#define PIEZO 8
+const int analogPin = A0,
+          piezoPin  = 8;
 
 
 ////////////////////////////////////////////////////
 
-void setup() {}
+void setup() {
+    Serial.begin(9600);
+}
 
 
 ////////////////////////////////////////////////////
 
 void loop() {
-  int keyVal = analogRead(ANALOG);
+  int keyVal = analogRead(analogPin);
+  Serial.println(keyVal);
 
   if (keyVal == 1023) {
     play(notes[0]);
-  } else if (isBetween(keyVal, 990, 1010)) {
+  } else if (isBetween(keyVal, 800, 900)) {
     play(notes[1]);
-  } else if (isBetween(keyVal, 505, 515)) {
+  } else if (isBetween(keyVal, 50, 100)) {
     play(notes[2]);
-  } else if (isBetween(keyVal, 5, 10)) {
+  } else if (isBetween(keyVal, 1, 10)) {
     play(notes[3]);
   } else {
-    noTone(PIEZO);
+    noTone(piezoPin);
   }
 }
 
@@ -40,5 +43,5 @@ boolean isBetween(int val, int low, int high) {
 
 // Play a tone on the piezo.
 void play(int frequency) {
-  tone(PIEZO, frequency);
+  tone(piezoPin, frequency);
 }
