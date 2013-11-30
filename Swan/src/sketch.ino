@@ -133,6 +133,7 @@ int lastGlyphPosition = 0,
     timeDisplayChars,  // How many characters the time/glyphs will need
     timeDisplayOffset; // How many spaces to offset from the left.
 
+
 /////////////////////////////////////
 
 void setup() {
