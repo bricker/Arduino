@@ -48,6 +48,7 @@ const unsigned long minInterval = 108;
 // This is an array of binary codes for ASCII characters.
 // The size of this array should be greater than the timeDisplayChars
 // integer set in the setup() function.
+// See page 17 of https://www.sparkfun.com/datasheets/LCD/HD44780.pdf
 #define GLYPH_SIZE 64
 
 const byte glyphs[GLYPH_SIZE] = {
