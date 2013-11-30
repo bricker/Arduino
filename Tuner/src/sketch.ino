@@ -1,7 +1,6 @@
 #include <cmath>
 
-const int bitRate    = 9600, // For logging
-          tonePin    = 8,    // Output pin, piezo
+const int tonePin    = 8,    // Output pin, piezo
           potPin     = A0,   // Input pin, potentiometer
           volumePin  = 3,    // Input pin, switch
           octavePin  = 4,    // Input pin, switch
@@ -68,8 +67,6 @@ int scaleSteps[scaleSize];
 int scaleFrequencies[scaleSize];
 
 void setup() {
-  Serial.begin(bitRate);
-
   memcpy(
     scaleSteps,
     bluesSteps, // HERE

@@ -2,8 +2,6 @@
 
 Servo servo;
 
-const int bitRate = 9600;
-
 const int potentiometerPin = A0,
           servoPin         = 9;
 
@@ -18,7 +16,6 @@ int potentiometerVal,
 
 void setup() {
   servo.attach(servoPin);
-  Serial.begin(bitRate);  
 }
 
 void loop() {

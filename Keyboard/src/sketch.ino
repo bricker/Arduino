@@ -7,7 +7,6 @@ const int analogPin = A0,
 ////////////////////////////////////////////////////
 
 void setup() {
-    Serial.begin(9600);
 }
 
 
@@ -15,7 +14,6 @@ void setup() {
 
 void loop() {
   int keyVal = analogRead(analogPin);
-  Serial.println(keyVal);
 
   if (keyVal == 1023) {
     play(notes[0]);

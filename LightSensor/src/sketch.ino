@@ -1,11 +1,9 @@
-const int bitRate = 9600;
-
-const int redLEDPin             = 11,
-          blueLEDPin            = 10,
-          greenLEDPin           = 9,
-          redSensorPin          = A0,
-          blueSensorPin         = A2,
-          greenSensorPin        = A1;
+const int redLEDPin      = 11,
+          blueLEDPin     = 10,
+          greenLEDPin    = 9,
+          redSensorPin   = A0,
+          blueSensorPin  = A2,
+          greenSensorPin = A1;
 
 int redSensorValue   = 0,
     blueSensorValue  = 0,
@@ -16,8 +14,6 @@ int redValue   = 0,
     greenValue = 0;
 
 void setup() {
-  Serial.begin(bitRate);
-
   pinMode(redLEDPin, OUTPUT);
   pinMode(blueLEDPin, OUTPUT);
   pinMode(greenLEDPin, OUTPUT);

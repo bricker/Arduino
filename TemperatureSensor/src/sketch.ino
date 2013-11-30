@@ -1,4 +1,3 @@
-const int   bitRate = 9600;
 const int   sensorPin    = A0;
 const float baselineTemp = 20.0;
 
@@ -8,8 +7,6 @@ const int blue   = 2;
 
 
 void setup() {
-  Serial.begin(bitRate);
-
   for (int pin = blue; pin <= red; pin++) {
     pinMode(pin, OUTPUT);
     turnOff(pin);
