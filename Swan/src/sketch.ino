@@ -166,7 +166,7 @@ void setup() {
     timeDisplayOffset = (lcdWide - timeDisplayChars) / 2;
 
     // Set the relative thresholds from the intervalSeconds.
-    // These variables should be set to SECONDS.
+    // These variables should be set to MILLISECONDS.
     // Examples are with T = 108m
     // We add an extra second so we can go all the way from
     // 108 minutes to 0 seconds. That's technically an extra second,
