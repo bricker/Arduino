@@ -42,7 +42,7 @@ const int   failsafeLow   = 10, // Low threshold for triggering completion
 // Full interval in MINUTES
 // Needs to be unsigned long so we can perform maths.
 // If you change this, be sure to change the glyphs array accordingly.
-const unsigned long minInterval = 1;
+const unsigned long minInterval = 108;
 
 // "Hieroglyph" characters
 // This is an array of binary codes for ASCII characters.
