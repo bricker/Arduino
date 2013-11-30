@@ -41,7 +41,6 @@ const int   failsafeLow   = 10, // Low threshold for triggering completion
 
 // Full interval in MINUTES
 // Needs to be unsigned long so we can perform maths.
-// If you change this, be sure to change the glyphs array accordingly.
 const unsigned long minInterval = 108;
 
 // "Hieroglyph" characters
@@ -138,7 +137,6 @@ int lastGlyphPosition = 0,
 /////////////////////////////////////
 
 void setup() {
-    Serial.begin(9600);
     lcd.begin(lcdWide, lcdTall);
 
     pinMode(switchPin, INPUT);
@@ -147,7 +145,8 @@ void setup() {
     pinMode(fsLed2, OUTPUT);
     pinMode(fsLed3, OUTPUT);
 
-    // seed
+    // Seed rand() with the value of the failsafePin (an analog-in),
+    // so we don't have to load a time library for this one thing.
     srand(digitalRead(failsafePin));
 
     // Set the number of characters to allocate for the time display.
@@ -165,7 +164,6 @@ void setup() {
 
     // Set the offset space from the left of the LCD.
     timeDisplayOffset = (lcdWide - timeDisplayChars) / 2;
-
 
     // Set the relative thresholds from the intervalSeconds.
     // These variables should be set to SECONDS.
@@ -191,7 +189,6 @@ void loop() {
     if (!countdownFinished) {
         writeCountdownToLCD();
     }
-
 
     // Setup variables so we know when to trigger each event.
     unsigned long   msL1th    = msPreviousTime + msBeepLevelOne,
@@ -228,7 +225,7 @@ void loop() {
     }
 
     // EXECUTE!! EXECUTE!!!! (T-0s)
-    // Same alarm, hieroglyps start showing
+    // Same alarm, hieroglyphs start showing
     if (msCurrentTime >= msHGth) {
         if (countdownFinished) {
             writeHieroglyphs();
