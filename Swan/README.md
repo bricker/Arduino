@@ -1,2 +1,2 @@
-![Operation Manual](images/swan-project-header.png)
+![Operation Manual](images/swan-operation-manual.png)
 
