@@ -291,7 +291,7 @@ void writeCountdownToLCD() {
         // a single 0 will always be printed in the last spot if
         // the mins is 0.
         for (int i = 1000, x = 7; x > 4; i /= 10, x--) {
-            if (timeDisplayChars == x && mins < i) {
+            if (timeDisplayChars >= x && mins < i) {
                 lcd.print(0);
             }
         }
