@@ -69,6 +69,9 @@ const byte glyphs[GLYPH_SIZE] = {
     B10101111,  B10111111,  B11001111,  B11011111
 };
 
+// The message to display when the time runs out.
+const char failureMsg[] = "SYSTEM FAILURE";
+
 // Configure the beep for the tone() function.
 const int   beepLength     = 20,
             baseBeepFreq   = 440,
@@ -350,7 +353,7 @@ void alertSystemFailure() {
         // Center the message, and will also overwrite the time so
         // we don't have to worry about clearing it out.
         lcd.setCursor(1, lcdRow2);
-        lcd.print("System Failure");
+        lcd.print(failureMsg);
 
         // Set this to true so we don't run this block again.
         failureAlertStarted = true;
