@@ -72,7 +72,7 @@ const byte glyphs[GLYPH_SIZE] = {
 // Configure the beep for the tone() function.
 const int   beepLength     = 20,
             baseBeepFreq   = 440,
-            baseBeepDelay  = 3000; // Delay between beeps, not for tone()
+            baseBeepDelay  = 2000; // Delay between beeps, not for tone()
 
 // Configure the beep for each level.
 // Frequency multipliers
